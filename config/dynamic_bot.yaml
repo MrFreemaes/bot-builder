@@ -1,0 +1,12 @@
+steps:
+  - action: search_template  # используется в bot/bot_modules/dynamic_bot.py
+    screenshot_type: ''  # доступен поиск в радиусе мышки --- around_mouse | стандартно - full
+    radius: 600  # радиус скриншота вокруг мышки | стандартно - 300
+    template_path: 'template/img_1.png'  # путь до шаблона
+    threshold: 0.9  #   | стандартно - 0.7
+    save_as: 'target'  # координаты найденного шаблона
+
+  - action: click  # используется в
+    point_from: 'target'
+
+  # - action: новая функция
