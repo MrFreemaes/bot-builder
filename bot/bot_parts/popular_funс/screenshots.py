@@ -3,13 +3,20 @@ import cv2
 import numpy as np
 
 
-def full_screen():
-    full_screenshot = ImageGrab.grab()
-    img = cv2.cvtColor(np.array(full_screenshot), cv2.COLOR_RGB2GRAY)
+# конвертируем изображение в серое
+def gray_image(screenshot):
+    img = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
     return img
 
 
-def screen_of_mause(radius, mouse_x, mouse_y):
+# скрин полного экрана
+def full_screenshot():
+    screenshot = ImageGrab.grab()
+    return gray_image(screenshot)
+
+
+# скрин по координатам мышки
+def screenshot_of_mause(radius, mouse_x, mouse_y):
     box = (
         mouse_x - radius,
         mouse_y - radius,
@@ -17,6 +24,13 @@ def screen_of_mause(radius, mouse_x, mouse_y):
         mouse_y + radius
     )
 
-    screenshot_mause = ImageGrab.grab(box)
-    img = cv2.cvtColor(np.array(screenshot_mause), cv2.COLOR_RGB2GRAY)
-    return img
+    screenshot = ImageGrab.grab(box)
+    return gray_image(screenshot)
+
+
+# скрин по координатам
+def screenshot_by_coordinates(x_1, y_1, x_2, y_2):
+    box = (x_1, y_1, x_2, y_2)
+
+    screenshot = ImageGrab.grab(box)
+    return gray_image(screenshot)

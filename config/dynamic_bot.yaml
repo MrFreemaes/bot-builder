@@ -1,12 +1,21 @@
+# делать get запрос по ключу и только когда выполняется функция с этим ключом
 steps:
-  - action: search_template  # используется в bot/bot_modules/dynamic_bot.py
-    screenshot_type: ''  # доступен поиск в радиусе мышки --- around_mouse | стандартно - full
-    radius: 600  # радиус скриншота вокруг мышки | стандартно - 300
-    template_path: 'template/img_1.png'  # путь до шаблона
-    threshold: 0.9  #   | стандартно - 0.7
-    save_as: 'target'  # координаты найденного шаблона
+  # - action: loop_forever
+  #  steps:
+  - action: loop_until_found
+    exit_if: 'target' #  если нет, то цикл бесконечный
 
-  - action: click  # используется в
+    steps:
+      - action: search_template  #
+        # screenshot_type: 'around_mouse'  #  доступен поиск в радиусе мышки --- around_mouse | стандартно - full
+        # radius: 300  #  радиус скриншота вокруг мышки | стандартно - 300
+        screenshot_type: 'by_coordinates'
+        coordinates: [0, 0, 1200, 900]
+        template_path: 'template/img_1.png'  #  путь до шаблона
+        threshold: 0.9  #  коэффициент совпадения шаблона | стандартно - 0.8
+        save_as: 'target'  #  координаты найденного шаблона
+
+  - action: click  #
     point_from: 'target'
 
-  # - action: новая функция
+# - action: новая функция
