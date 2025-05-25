@@ -1,11 +1,10 @@
 ----------------
-func: loop_forever
-бесконечный цикл
+func: loop_forever - бесконечный цикл
 ----------------
-func: loop_until_found
+func: loop_until_found - цикл выходит когда найдены координаты шаблона
 аргументы: exit_if - выходит когда находит шаблон
 ----------------
-func: search_template
+func: search_template - функция поиска шаблона (можно выбирать где искать)
 аргументы:
 screenshot_type:
     1 - full:
@@ -20,6 +19,15 @@ template_path - путь до шаблона
 threshold - коэффициент совпадения с шаблоном
 save_as - координаты найденного шаблона
 -----------------
-func: click
-аргументы: point_from - координаты клика, берутся из save_as
+func: click - с максимально возможной скоростью кликает по координатам
+аргументы:
+pressing_type: click/double_click/right_click/middle_click
+point_from - координаты клика, берутся из поиска шаблона
+-----------------
+??????? ^^^ мб совместить с верхней
+func: moveto_and_click - передвигает с кликает по координатам с заданной скоростью
+аргументы:
+pressing_type: click/double_click/right_click/middle_click
+time_of_movement: время движения до точки стандартно 0.1
+point_from - координаты клика, берутся из поиска шаблона
 -----------------

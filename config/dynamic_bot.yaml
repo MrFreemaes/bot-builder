@@ -7,15 +7,16 @@ steps:
 
     steps:
       - action: search_template  #
-        # screenshot_type: 'around_mouse'  #  доступен поиск в радиусе мышки --- around_mouse | стандартно - full
-        # radius: 300  #  радиус скриншота вокруг мышки | стандартно - 300
-        screenshot_type: 'by_coordinates'
-        coordinates: [0, 0, 1200, 900]
-        template_path: 'template/img_1.png'  #  путь до шаблона
+        screenshot_type: 'around_mouse'  #  доступен поиск в радиусе мышки --- around_mouse | стандартно - full
+        radius: 300  #  радиус скриншота вокруг мышки | стандартно - 300
+        # screenshot_type: 'by_coordinates'
+        # coordinates: [0, 0, 1200, 900]
+        template_path: 'template/img.png'  #  путь до шаблона
         threshold: 0.9  #  коэффициент совпадения шаблона | стандартно - 0.8
         save_as: 'target'  #  координаты найденного шаблона
 
-  - action: click  #
+  - action: click
+    pressing_type: 'click'  # click/double_click/right_click/middle_click
     point_from: 'target'
 
 # - action: новая функция

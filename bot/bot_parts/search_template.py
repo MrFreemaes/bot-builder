@@ -11,8 +11,10 @@ def search_template(step, context):
     x = time.time()
 
     # смотрит какой скриншот делать (можно добавлять)
-    stype = step.get('screenshot_type', 'full_screen')
-    if stype == 'around_mouse':
+    stype = step.get('screenshot_type', 'full')
+    if stype == 'full':
+        search_template_everywhere(step, context, template, w, h)
+    elif stype == 'around_mouse':
         search_pattern_around_mouse(step, context, template, w, h)
     elif stype == 'by_coordinates':
         search_template_by_coordinates(step, context, template, w, h)

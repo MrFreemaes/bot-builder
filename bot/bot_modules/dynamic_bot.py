@@ -3,7 +3,9 @@ from bot.bot_parts import search_template, mouse_clicks
 
 ACTIONS = {
     'search_template': search_template.search_template,
-    'click': mouse_clicks.click_on_coordinates
+    'click': mouse_clicks.click,
+    'moveto_and_click': mouse_clicks.moveto_and_click,
+    # 'time_sleep': ''
 }
 
 
@@ -38,13 +40,15 @@ class DynamicBot(BaseBot):
 
     def loop_until_found(self, step, context):
         key_to_check = step.get('exit_if')
+        context[key_to_check] = None  # одно из решений зацикливания
         inner_steps = step.get('steps', [])
+
         print(f'{__name__} Запуск цикла до нахождения ключа: {key_to_check}')
         while True:
-            for inner_step in inner_steps:
-                self.execute_step(inner_step, context)
-
             # условие выхода
             if key_to_check and context.get(key_to_check):
                 print(f'{__name__} Ключ найден в контексте — выход из цикла')
                 break
+
+            for inner_step in inner_steps:
+                self.execute_step(inner_step, context)

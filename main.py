@@ -4,7 +4,7 @@ import time
 
 
 def main():
-    with open('config/dynamic_bot.yaml', 'r', encoding='utf-8') as f:
+    with open('config/test.yaml', 'r', encoding='utf-8') as f:
         config = yaml.safe_load(f)
 
     bot = bot_modules.dynamic_bot.DynamicBot(config)
