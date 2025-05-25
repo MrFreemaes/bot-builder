@@ -1,11 +1,12 @@
 from .base_bot import BaseBot
 from bot.bot_parts import search_template, mouse_clicks
+from bot.bot_parts.popular_funс import different_func
 
 ACTIONS = {
     'search_template': search_template.search_template,
-    'click': mouse_clicks.click,
-    'moveto_and_click': mouse_clicks.moveto_and_click,
-    # 'time_sleep': ''
+    'mouse_action': mouse_clicks.mouse_actions,
+    'time_sleep': different_func.time_sleep,
+    # '': ''
 }
 
 

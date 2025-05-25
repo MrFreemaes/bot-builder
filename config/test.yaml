@@ -1,40 +1,47 @@
-# делать get запрос по ключу и только когда выполняется функция с этим ключом
 steps:
   - action: loop_forever
     steps:
       - action: loop_until_found
-        exit_if: 'target' #  если нет, то цикл бесконечный
+        exit_if: 'target'
 
         steps:
-          - action: search_template  #
-            screenshot_type: 'around_mouse'  #  доступен поиск в радиусе мышки --- around_mouse | стандартно - full
-            radius: 300  #  радиус скриншота вокруг мышки | стандартно - 300
-            # screenshot_type: 'by_coordinates'
-            # coordinates: [0, 0, 1200, 900]
-            template_path: 'template/img.png'  #  путь до шаблона
-            threshold: 0.9  #  коэффициент совпадения шаблона | стандартно - 0.8
-            save_as: 'target'  #  координаты найденного шаблона
+          - action: search_template
+            screenshot_type: 'full'
+            #radius: 300
+            template_path: 'template/img.png'
+            threshold: 0.9
+            save_as: 'target'
 
-      - action: click
-        pressing_type: 'click'  # click/double_click/right_click/middle_click
-        time_of_movement: 0
+      - action: mouse_action
+        action_type: 'move_to'
+        time_of_movement: 1
+        point_from: 'target'
+
+      - action: time_sleep
+        pause_time: 3
+
+      - action: mouse_action
+        action_type: 'move_to'
+        time_of_movement: 1
+        coordinates: [ 100, 200 ]
+        point_from: 'target'
+
+      - action: mouse_action
+        action_type: 'move_to'
+        time_of_movement: 1
         point_from: 'target'
 
       - action: loop_until_found
-        exit_if: 'target' #  если нет, то цикл бесконечный
+        exit_if: 'target'
 
         steps:
-          - action: search_template  #
-            screenshot_type: 'full'  #  доступен поиск в радиусе мышки --- around_mouse | стандартно - full
-            #  радиус скриншота вокруг мышки | стандартно - 300
-            # screenshot_type: 'by_coordinates'
-            # coordinates: [0, 0, 1200, 900]
-            template_path: 'template/img_1.png'  #  путь до шаблона
-            threshold: 0.9  #  коэффициент совпадения шаблона | стандартно - 0.8
-            save_as: 'target'  #  координаты найденного шаблона
+          - action: search_template
+            screenshot_type: 'full'
+            template_path: 'template/img_1.png'
+            threshold: 0.9
+            save_as: 'target'
 
-          - action: moveto_and_click
-            pressing_type: 'double_click'  # double_click/right_click/middle_click
-            time_of_movement: 0.3
-            point_from: 'target'
-# - action: новая функция
+      - action: mouse_action
+        action_type: 'move_to'
+        pressing_type: ''
+        point_from: 'target'

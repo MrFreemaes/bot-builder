@@ -15,8 +15,10 @@ steps:
         threshold: 0.9  #  коэффициент совпадения шаблона | стандартно - 0.8
         save_as: 'target'  #  координаты найденного шаблона
 
-  - action: click
-    pressing_type: 'click'  # click/double_click/right_click/middle_click
+  - action: mouse_action
+    action_type: 'click'  # 'click'/ 'move_to_and_click'/'move_to'/                   'mouse_down_or_up'('down'/'up')
+    pressing_type: 'click'  # 'click'/ 'double_click'/'right_click'/'middle_click'/   'down'/'up'
+    # coordinates:
     point_from: 'target'
 
 # - action: новая функция

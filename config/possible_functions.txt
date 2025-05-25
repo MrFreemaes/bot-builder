@@ -19,15 +19,27 @@ template_path - путь до шаблона
 threshold - коэффициент совпадения с шаблоном
 save_as - координаты найденного шаблона
 -----------------
-func: click - с максимально возможной скоростью кликает по координатам
+func: mouse_actions
 аргументы:
-pressing_type: click/double_click/right_click/middle_click
-point_from - координаты клика, берутся из поиска шаблона
------------------
-??????? ^^^ мб совместить с верхней
-func: moveto_and_click - передвигает с кликает по координатам с заданной скоростью
+action_type: 'click'/'move_to_and_click'/'move_to'/'mouse_down_or_up'
+    'click':
+        аргументы:
+        pressing_type: 'click'/'double_click'/'right_click'/'middle_click'
+    'move_to_and_click':
+        аргументы:
+        pressing_type: 'click'/'double_click'/'right_click'/'middle_click'
+        time_of_movement: 0.3 - время передвижения курсора
+    'move_to':
+        аргументы:
+        time_of_movement: 0.3 - время передвижения курсора
+    'mouse_down_or_up':
+        аргументы:
+        pressing_type: 'down'/'up'
+общие аргументы:
+coordinates: 'from_user' - если user укажет. по стандарту 'target'
+point_from: 'target'
+------------------
+func: time_sleep
 аргументы:
-pressing_type: click/double_click/right_click/middle_click
-time_of_movement: время движения до точки стандартно 0.1
-point_from - координаты клика, берутся из поиска шаблона
------------------
+pause_time: 14.3 - стандартно 1 с
+------------------
