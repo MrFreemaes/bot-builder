@@ -6,19 +6,17 @@ steps:
 
         steps:
           - action: search_template
-            screenshot_type: 'full'
-            #radius: 300
+            screenshot_type: 'around_mouse'
+            radius: 300
             template_path: 'template/img.png'
             threshold: 0.9
             save_as: 'target'
 
       - action: mouse_action
-        action_type: 'move_to'
+        action_type: 'mouse_down_or_up'
+        pressing_type: 'down'
         time_of_movement: 1
         point_from: 'target'
-
-      - action: time_sleep
-        pause_time: 3
 
       - action: mouse_action
         action_type: 'move_to'
@@ -27,7 +25,8 @@ steps:
         point_from: 'target'
 
       - action: mouse_action
-        action_type: 'move_to'
+        action_type: 'mouse_down_or_up'
+        pressing_type: 'up'
         time_of_movement: 1
         point_from: 'target'
 
@@ -36,7 +35,8 @@ steps:
 
         steps:
           - action: search_template
-            screenshot_type: 'full'
+            screenshot_type: 'around_mouse'
+            radius: 300
             template_path: 'template/img_1.png'
             threshold: 0.9
             save_as: 'target'

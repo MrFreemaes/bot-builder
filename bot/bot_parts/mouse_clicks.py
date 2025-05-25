@@ -1,6 +1,11 @@
 import pyautogui as gui
 
 
+# возможная проверка координат
+# if point is None or not isinstance(point, (tuple, list)) or len(point) != 2:
+#     print(f'{__name__} Некорректные координаты: {point}')
+#     return
+
 def mouse_actions(step, context):
     if step.get('coordinates'):
         point = step.get('coordinates')
@@ -11,54 +16,39 @@ def mouse_actions(step, context):
         atype = step.get('action_type', 'click')
         ptype = step.get('pressing_type')
 
-        if atype == 'click':
-            click(ptype, point)
+        match atype:
+            case 'click':
+                click(ptype, point)
+            case 'move_to_and_click':
+                move_to_and_click(ptype, point, step.get('time_of_movement', 0.2))
+            case 'move_to':
+                context[step['point_from']] = point  # чтобы мышка оставалась там куда ее передвинули
+                gui.moveTo(*point, duration=step.get('time_of_movement', 0.2))
+            case 'mouse_down_or_up':
+                mouse_down_or_up(ptype, point)
+            case _:
+                print(f'{__name__} Действие не определено')
 
-        elif atype == 'move_to_and_click':
-            time_of_movement = step.get('time_of_movement', 0.2)
-            move_to_and_click(ptype, point, time_of_movement)
 
-        elif atype == 'move_to':
-            time_of_movement = step.get('time_of_movement', 0.2)
-            context[step['point_from']] = point  # чтобы мышка оставалась там куда ее передвинули
-            gui.moveTo(*point, duration=time_of_movement)
-
-        elif atype == 'mouse_down_or_up':
-            mouse_down_or_up(ptype, point)
-
-        else:
-            print(f'{__name__} Действие не определено')
+def perform_click(ptype, point):
+    actions = {
+        'click': gui.click,
+        'double_click': gui.doubleClick,
+        'right_click': gui.rightClick,
+        'middle_click': gui.middleClick,
+    }
+    actions.get(ptype, gui.click)(*point)
 
 
 # нажать по координатам
 def click(ptype, point):
-    if ptype == 'click':
-        gui.click(*point)
-    elif ptype == 'double_click':
-        gui.doubleClick(*point)
-    elif ptype == 'right_click':
-        gui.rightClick(*point)
-    elif ptype == 'middle_click':
-        gui.middleClick(*point)
-    else:
-        print(f'{__name__} Тип нажатия не определен, нажата лкм')
-        gui.click(*point)
+    perform_click(ptype, point)
 
 
 # передвинуть в координаты и нажать
 def move_to_and_click(ptype, point, move_time):
     gui.moveTo(*point, duration=move_time)
-    if ptype == 'click':
-        gui.click(*point)
-    elif ptype == 'double_click':
-        gui.doubleClick(*point)
-    elif ptype == 'right_click':
-        gui.rightClick(*point)
-    elif ptype == 'middle_click':
-        gui.middleClick(*point)
-    else:
-        print(f'{__name__} Тип нажатия не определен, нажата лкм')
-        gui.click(*point)
+    perform_click(ptype, point)
 
 
 # зажать и отпустить кнопку

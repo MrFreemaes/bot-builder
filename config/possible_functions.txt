@@ -35,6 +35,7 @@ action_type: 'click'/'move_to_and_click'/'move_to'/'mouse_down_or_up'
     'mouse_down_or_up':
         аргументы:
         pressing_type: 'down'/'up'
+
 общие аргументы:
 coordinates: 'from_user' - если user укажет. по стандарту 'target'
 point_from: 'target'

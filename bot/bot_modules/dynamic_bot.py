@@ -41,7 +41,7 @@ class DynamicBot(BaseBot):
 
     def loop_until_found(self, step, context):
         key_to_check = step.get('exit_if')
-        context[key_to_check] = None  # одно из решений зацикливания
+        context[key_to_check] = None  # одно из решений зацикливания при повторном применении функции
         inner_steps = step.get('steps', [])
 
         print(f'{__name__} Запуск цикла до нахождения ключа: {key_to_check}')
