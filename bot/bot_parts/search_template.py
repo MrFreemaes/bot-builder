@@ -1,10 +1,14 @@
 import cv2
 import numpy as np
-from bot.bot_parts.popular_funс import screenshots, mouse_actions
+from bot.bot_parts.popular_funс import screenshots, mouse
 import time
 
 
 def search_template(step, context):
+    """
+    Основная функция определяющая какой вид скриншота нам нужен.
+    Берет шаблон из пути указанном в config/name.yaml
+    """
     template = cv2.imread(step['template_path'], cv2.IMREAD_GRAYSCALE)
     w, h = template.shape[::-1]
 
@@ -26,7 +30,11 @@ def search_template(step, context):
 
 # поиск шаблона вокруг мышки
 def search_pattern_around_mouse(step, context, template, w, h):
-    mouse_x, mouse_y = mouse_actions.mouse_coordinates()
+    """
+    Поиск шаблона вокруг мышки.
+    Скорость обработки - большая.
+    """
+    mouse_x, mouse_y = mouse.mouse_coordinates()
     radius = step.get('radius', 300)
     img = screenshots.screenshot_of_mause(radius, mouse_x, mouse_y)
 
@@ -53,6 +61,10 @@ def search_pattern_around_mouse(step, context, template, w, h):
 
 # поиск шаблона на всем экране
 def search_template_everywhere(step, context, template, w, h):
+    """
+    Ищет шаблон на всем экране.
+    Скорость обработки - средняя.
+    """
     img = screenshots.full_screenshot()
 
     res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
@@ -70,6 +82,12 @@ def search_template_everywhere(step, context, template, w, h):
 
 # поиск шаблона по координатам
 def search_template_by_coordinates(step, context, template, w, h):
+    """
+    Ищет шаблон по заданным пользователем координатам.
+    Эффективный способ для нахождения шаблона
+    когда заранее известны координаты. Например: кнопки.
+    Скорость обработки - очень быстрая при размере шаблона ~ равном зоне поиска.
+    """
     x_1, y_1, x_2, y_2 = step.get('coordinates', (0, 0, 1000, 1000))
     img = screenshots.screenshot_by_coordinates(x_1, y_1, x_2, y_2)
 

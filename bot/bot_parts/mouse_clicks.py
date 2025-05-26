@@ -7,6 +7,10 @@ import pyautogui as gui
 #     return
 
 def mouse_actions(step, context):
+    """
+    Функция определяющая действия с мышкой записанные в config/name.yaml.
+    Возможно определение координат как пользователем, так и автоматически.
+    """
     if step.get('coordinates'):
         point = step.get('coordinates')
     else:
@@ -53,6 +57,9 @@ def move_to_and_click(ptype, point, move_time):
 
 # зажать и отпустить кнопку
 def mouse_down_or_up(ptype, point):
+    """
+    Функция для нажатия и отпускания лкм.
+    """
     if ptype == 'down':
         gui.mouseDown(*point)
     elif ptype == 'up':

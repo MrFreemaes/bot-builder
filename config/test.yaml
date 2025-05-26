@@ -1,47 +1,40 @@
 steps:
-  - action: loop_forever
+#  - action: loop_forever
+#    steps:
+  - action: loop_until_found
+    exit_if: 'target'
+
     steps:
-      - action: loop_until_found
-        exit_if: 'target'
+      - action: search_template
+        screenshot_type: 'full'
+        radius: 300
+        template_path: 'template/img.png'
+        threshold: 0.9
+        save_as: 'target'
 
-        steps:
-          - action: search_template
-            screenshot_type: 'around_mouse'
-            radius: 300
-            template_path: 'template/img.png'
-            threshold: 0.9
-            save_as: 'target'
+  - action: mouse_action
+    action_type: 'move_to_and_click'
+    pressing_type: 'double_click'
+    time_of_movement: 1
+    point_from: 'target'
 
-      - action: mouse_action
-        action_type: 'mouse_down_or_up'
-        pressing_type: 'down'
-        time_of_movement: 1
-        point_from: 'target'
+  - action: loop_until_found
+    exit_if: 'target'
 
-      - action: mouse_action
-        action_type: 'move_to'
-        time_of_movement: 1
-        coordinates: [ 100, 200 ]
-        point_from: 'target'
+    steps:
+      - action: search_template
+        screenshot_type: 'full'
+#        radius: 300
+        template_path: 'template/img_3.png'
+        threshold: 0.8
+        save_as: 'target'
 
-      - action: mouse_action
-        action_type: 'mouse_down_or_up'
-        pressing_type: 'up'
-        time_of_movement: 1
-        point_from: 'target'
+  - action: mouse_action
+    action_type: 'move_to_and_click'
+    pressing_type: 'click'
+    time_of_movement: 1
+    point_from: 'target'
 
-      - action: loop_until_found
-        exit_if: 'target'
-
-        steps:
-          - action: search_template
-            screenshot_type: 'around_mouse'
-            radius: 300
-            template_path: 'template/img_1.png'
-            threshold: 0.9
-            save_as: 'target'
-
-      - action: mouse_action
-        action_type: 'move_to'
-        pressing_type: ''
-        point_from: 'target'
+  - action: print_text
+    path: 'template/explanation.txt'
+    interval: 0.02
