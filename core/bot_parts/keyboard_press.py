@@ -1,4 +1,4 @@
-import pyautogui as gui
+import pyautogui
 
 
 def keyboard_action(step, context):
@@ -16,7 +16,7 @@ def keyboard_action(step, context):
 
 def perform_press(key):
     action = {
-        'press': gui.press,
+        'press': pyautogui.press,
     }
 
 
@@ -25,7 +25,7 @@ def print_text(path, interval):
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 text = f.read()
-                gui.typewrite(text, interval=interval)
+                pyautogui.typewrite(text, interval=interval)
         except Exception as err:
             print(f'{__name__} Ошибка {err}')
             return

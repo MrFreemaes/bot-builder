@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from bot.bot_parts.popular_funс import screenshots, mouse
+from core.bot_parts.utils import screenshots, mouse_utils
 import time
 
 
@@ -34,7 +34,7 @@ def search_pattern_around_mouse(step, context, template, w, h):
     Поиск шаблона вокруг мышки.
     Скорость обработки - большая.
     """
-    mouse_x, mouse_y = mouse.mouse_coordinates()
+    mouse_x, mouse_y = mouse_utils.mouse_coordinates()
     radius = step.get('radius', 300)
     img = screenshots.screenshot_of_mause(radius, mouse_x, mouse_y)
 

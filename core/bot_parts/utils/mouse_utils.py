@@ -1,9 +1,9 @@
-import pyautogui as gui
+import pyautogui
 
 
 def mouse_coordinates():
     """
     Возвращает координаты мышки в данный момент.
     """
-    x, y = gui.position()
+    x, y = pyautogui.position()
     return x, y

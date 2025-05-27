@@ -1,6 +1,6 @@
 from .base_bot import BaseBot
-from bot.bot_parts import search_template, mouse_clicks, keyboard_press
-from bot.bot_parts.popular_funс import different
+from core.bot_parts import search_template, mouse_clicks, keyboard_press
+from core.bot_parts.utils import different
 
 """Функции для вызова по имени заданном в config/name.yaml"""
 ACTIONS = {

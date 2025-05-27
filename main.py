@@ -1,9 +1,9 @@
 import yaml
-from bot import bot_modules
+from core import bot_modules
 import time
 
 """
-Основная логика находится в bot/bot_modules/dynamic_bot.py
+Основная логика находится в core/bot_modules/dynamic_bot.py
 """
 
 

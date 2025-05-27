@@ -1,4 +1,4 @@
-import pyautogui as gui
+import pyautogui
 
 
 # возможная проверка координат
@@ -27,7 +27,7 @@ def mouse_actions(step, context):
                 move_to_and_click(ptype, point, step.get('time_of_movement', 0.2))
             case 'move_to':
                 context[step['point_from']] = point  # чтобы мышка оставалась там куда ее передвинули
-                gui.moveTo(*point, duration=step.get('time_of_movement', 0.2))
+                pyautogui.moveTo(*point, duration=step.get('time_of_movement', 0.2))
             case 'mouse_down_or_up':
                 mouse_down_or_up(ptype, point)
             case _:
@@ -36,12 +36,12 @@ def mouse_actions(step, context):
 
 def perform_click(ptype, point):
     actions = {
-        'click': gui.click,
-        'double_click': gui.doubleClick,
-        'right_click': gui.rightClick,
-        'middle_click': gui.middleClick,
+        'click': pyautogui.click,
+        'double_click': pyautogui.doubleClick,
+        'right_click': pyautogui.rightClick,
+        'middle_click': pyautogui.middleClick,
     }
-    actions.get(ptype, gui.click)(*point)
+    actions.get(ptype, pyautogui.click)(*point)
 
 
 # нажать по координатам
@@ -51,7 +51,7 @@ def click(ptype, point):
 
 # передвинуть в координаты и нажать
 def move_to_and_click(ptype, point, move_time):
-    gui.moveTo(*point, duration=move_time)
+    pyautogui.moveTo(*point, duration=move_time)
     perform_click(ptype, point)
 
 
@@ -61,8 +61,8 @@ def mouse_down_or_up(ptype, point):
     Функция для нажатия и отпускания лкм.
     """
     if ptype == 'down':
-        gui.mouseDown(*point)
+        pyautogui.mouseDown(*point)
     elif ptype == 'up':
-        gui.mouseUp(*point)
+        pyautogui.mouseUp(*point)
     else:
         print(f'{__name__} Тип нажатия не определен')
